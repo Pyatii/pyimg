@@ -1,6 +1,13 @@
 version: "3"
 services:
 
+    nginx:
+        image: nginx:stable-perl
+        container_name: nginx
+        ports:
+            - 8080:8080
+        hostname: server
+
     rabbit_mq:
         image: rabbitmq:3.10.7-management
         container_name: rabbit_mq

@@ -21,12 +21,13 @@ channel.queue_declare(queue=queue_name)
 routing_key = 'info'
 channel.queue_bind(exchange=exchange_name, queue=queue_name, routing_key=routing_key)
 
-with open("producer/Felis_silvestris_silvestris.jpg", "rb") as file:
+with open("/usr/src/app/producer/Felis_silvestris_silvestris.jpg", "rb") as file:
     img_64 = file.read()
 message = base64.b64encode(img_64)
-
-channel.basic_publish(exchange=exchange_name, routing_key=routing_key, body=message)
-print("Фото отправлено")
+while True:
+    channel.basic_publish(exchange=exchange_name, routing_key=routing_key, body=message)
+    print("Фото отправлено")
+    time.sleep(1)
 
 channel.close()
 
