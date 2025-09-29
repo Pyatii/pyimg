@@ -12,8 +12,12 @@ services:
         hostname: server
         volumes:
             - ./nginx:/usr/share/nginx/html:ro
-            - ./nginx.conf:/etc/nginx/nginx.conf:ro
-        command: nginx -g "daemon off;"
+        networks:
+            -network
+    
+    networks:
+        network:
+            driver: bridge
 
     rabbit_mq:
         image: rabbitmq:3.10.7-management
