@@ -1,4 +1,5 @@
 import pika
+import base64
 
 
 url_params = pika.URLParameters('amqp://rabbit_mq?connection_attempts=10&retry_delay=10')
@@ -13,6 +14,8 @@ channel.queue_declare(queue=queue_name)
 
 def callback(ch, method, properties, body):
     print(f"Received message {body}")
+    with open("/usr/src/app/consumer/photo.jpg", "wb") as file:
+        file.write(base64.decode(body))
 
 
 def consume():
