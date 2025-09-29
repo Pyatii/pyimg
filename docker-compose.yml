@@ -13,11 +13,7 @@ services:
         volumes:
             - ./nginx:/usr/share/nginx/html:ro
         networks:
-            -network
-    
-    networks:
-        network:
-            driver: bridge
+            - network
 
     rabbit_mq:
         image: rabbitmq:3.10.7-management
@@ -46,3 +42,7 @@ services:
 volumes:
     rabbit_mqdata:
         driver: local
+
+networks:
+    network:
+        driver: bridge
