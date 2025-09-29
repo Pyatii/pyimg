@@ -3,12 +3,17 @@ services:
 
     webserver:
         image: nginx:stable-perl
+        restart: always
         container_name: nginx
+        expose:
+            - "80"
         ports:
-            - 8080:8080
+            - 8080:80
         hostname: server
         volumes:
             - ./nginx:/usr/share/nginx/html:ro
+            - ./nginx.conf:/etc/nginx/nginx.conf:ro
+        command: nginx -g "daemon off;"
 
     rabbit_mq:
         image: rabbitmq:3.10.7-management
