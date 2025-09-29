@@ -1,0 +1,30 @@
+version: "3"
+services:
+
+    rabbit_mq:
+        image: rabbitmq:3.10.7-management
+        container_name: rabbit_mq
+        hostname: rabbitmq
+        restart: always
+        volumes:
+            - rabbit_mqdata:/usr/share/rabbitmq/data
+        ports:
+            - 15672:15672
+            
+    producer:
+        build: producer
+        depends_on:
+            - rabbit_mq
+        volumes:
+            - ./producer:/usr/src/app/producer
+            
+    consumer:
+        build: consumer
+        depends_on:
+            - rabbit_mq
+        volumes:
+            - ./consumer:/usr/src/app/consumer
+            
+volumes:
+    rabbit_mqdata:
+        driver: local
