@@ -14,9 +14,8 @@ channel.queue_declare(queue=queue_name)
 
 
 def callback(ch, method, properties, body):
-    print(f"Received message {body}")
-    image = Image.open(BytesIO(image_data))
-    image = image.resize((image.width // 2, image.height // 2))
+    image = Image.open(BytesIO(base64.b64decode(body)))
+    image = image.resize((image.width // 4, image.height // 4))
     image.save("/usr/src/app/consumer/images/photo.jpg", "JPEG")
 
 
