@@ -11,7 +11,7 @@ services:
             - 8080:80
         hostname: server
         volumes:
-            - ./nginx:/usr/share/nginx/html:ro
+            - ./nginx:/usr/share/nginx/html
             - shared_images:/usr/share/nginx/html/images:rw
         networks:
             - network
