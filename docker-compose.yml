@@ -12,7 +12,7 @@ services:
         hostname: server
         volumes:
             - ./nginx:/usr/share/nginx/html:ro
-            - shared_images:/usr/share/nginx/html
+            - shared_images:/usr/share/nginx/html/images:rw
         networks:
             - network
         depends_on:
@@ -40,8 +40,7 @@ services:
         depends_on:
             - rabbit_mq
         volumes:
-            - ./consumer:/usr/src/app/consumer
-            - shared_images:/usr/src/app/consumer
+            - shared_images:/usr/src/app/consumer/images:rw
             
 volumes:
     rabbit_mqdata:

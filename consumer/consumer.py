@@ -14,7 +14,7 @@ channel.queue_declare(queue=queue_name)
 
 def callback(ch, method, properties, body):
     print(f"Received message {body}")
-    with open("/usr/src/app/consumer/photo.jpg", "wb") as file:
+    with open("/usr/src/app/consumer/images/photo.jpg", "wb") as file:
         file.write(base64.b64decode(body))
 
 
