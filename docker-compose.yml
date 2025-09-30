@@ -12,8 +12,11 @@ services:
         hostname: server
         volumes:
             - ./nginx:/usr/share/nginx/html:ro
+            - shared_images:/usr/share/nginx/html
         networks:
             - network
+        depends_on:
+            - consumer
 
     rabbit_mq:
         image: rabbitmq:3.10.7-management
@@ -38,9 +41,12 @@ services:
             - rabbit_mq
         volumes:
             - ./consumer:/usr/src/app/consumer
+            - shared_images:/usr/src/app/consumer
             
 volumes:
     rabbit_mqdata:
+        driver: local
+    shared_images:
         driver: local
 
 networks:
